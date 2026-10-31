@@ -1,0 +1,366 @@
+.collections-page {
+  min-height: 100vh;
+  background: #050505;
+  color: #f5f5f5;
+}
+
+.collections-hero {
+  min-height: 380px;
+  padding: 150px 20px 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(198, 166, 107, 0.12),
+      transparent 65%
+    ),
+    #050505;
+}
+
+.collections-eyebrow {
+  color: #c6a66b;
+  letter-spacing: 5px;
+  font-size: 11px;
+  margin-bottom: 18px;
+}
+
+.collections-hero h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(42px, 6vw, 70px);
+  font-weight: 500;
+  margin: 0 0 15px;
+}
+
+.collections-hero > p:last-child {
+  max-width: 550px;
+  color: #b7b7b7;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+/* COLLECTION CONTENT */
+
+.collections-content {
+  max-width: 1250px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 55px 0 100px;
+}
+
+/* CATEGORY TABS */
+
+.collections-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-bottom: 1px solid rgba(198, 166, 107, 0.18);
+  padding-bottom: 22px;
+}
+
+.collection-tab {
+  background: transparent;
+  border: 1px solid rgba(198, 166, 107, 0.3);
+  color: #b7b7b7;
+  padding: 12px 25px;
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.collection-tab:hover,
+.collection-tab.active {
+  background: #c6a66b;
+  color: #050505;
+  border-color: #c6a66b;
+}
+
+/* SECTION HEADING */
+
+.collections-heading {
+  text-align: center;
+  margin: 65px 0 40px;
+}
+
+.collections-heading span {
+  color: #c6a66b;
+  font-size: 10px;
+  letter-spacing: 4px;
+}
+
+.collections-heading h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 42px;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+/* PRODUCT GRID */
+
+.collections-product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 35px 25px;
+}
+
+.collections-product-card {
+  background: #0d0d0d;
+  border: 1px solid rgba(198, 166, 107, 0.12);
+  transition: transform 0.35s ease, border-color 0.35s ease;
+}
+
+.collections-product-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(198, 166, 107, 0.5);
+}
+
+.collections-product-image {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background: #111;
+}
+
+.collections-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.collections-product-card:hover .collections-product-image img {
+  transform: scale(1.06);
+}
+
+.collections-product-info {
+  padding: 22px;
+}
+
+.collections-product-info h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.collections-product-info p {
+  color: #b7b7b7;
+  font-size: 12px;
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+.collections-product-price {
+  color: #c6a66b;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* LOADING / EMPTY / ERROR */
+
+.collections-message {
+  text-align: center;
+  padding: 75px 20px;
+  color: #b7b7b7;
+}
+
+.collections-message h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 32px;
+  color: #c6a66b;
+  margin-bottom: 12px;
+}
+
+.collections-message p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.collections-message.error {
+  color: #e6a0a0;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .collections-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .collections-product-image {
+    height: 260px;
+  }
+}
+
+@media (max-width: 600px) {
+  .collections-hero {
+    min-height: 330px;
+    padding: 130px 20px 65px;
+  }
+
+  .collections-content {
+    width: 92%;
+  }
+
+  .collections-tabs {
+    gap: 8px;
+  }
+
+  .collection-tab {
+    padding: 10px 15px;
+    font-size: 10px;
+  }
+
+  .collections-heading h2 {
+    font-size: 34px;
+  }
+
+  .collections-product-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .collections-product-image {
+    height: 280px;
+  }
+}
+
+
+
+
+
+
+.collections-product-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.collections-view-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 12px;
+  background: transparent;
+  border: 1px solid rgba(198, 166, 107, 0.55);
+  color: #c6a66b;
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.collections-view-btn:hover {
+  background: #c6a66b;
+  color: #050505;
+}
+
+.collections-cart-btn {
+  width: 46px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #c6a66b;
+  color: #050505;
+  border: 1px solid #c6a66b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.collections-cart-btn:hover:not(:disabled) {
+  background: transparent;
+  color: #c6a66b;
+}
+
+.collections-cart-btn.is-added {
+  background: transparent;
+  color: #c6a66b;
+  border-color: #c6a66b;
+  cursor: default;
+}
+
+.collections-cart-btn:disabled {
+  opacity: 1;
+}
+
+
+
+
+
+.collections-product-image {
+  position: relative;
+  overflow: hidden;
+  background: #0d0d0d;
+  aspect-ratio: 4 / 5;
+}
+
+/* Product image */
+
+.collections-product-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+
+  opacity: 0;
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.8s cubic-bezier(0.2, 0.65, 0.3, 1);
+}
+
+/* Reveal image after loading */
+
+.collections-product-image.image-loaded img {
+  opacity: 1;
+}
+
+/* Keep image hidden while loading */
+
+.collections-product-image.image-loading img {
+  opacity: 0;
+}
+
+/* Loading placeholder */
+
+.image-placeholder {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    110deg,
+    #0d0d0d 8%,
+    #191919 18%,
+    #0d0d0d 33%
+  );
+
+  background-size: 200% 100%;
+
+  animation: image-shimmer 1.5s linear infinite;
+}
+
+/* Shimmer animation */
+
+@keyframes image-shimmer {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+/* Product image hover effect */
+
+.collections-product-card:hover
+.collections-product-image img {
+  transform: scale(1.04);
+}

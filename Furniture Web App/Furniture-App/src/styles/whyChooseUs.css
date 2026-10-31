@@ -1,0 +1,161 @@
+
+/* WHY CHOOSE US SECTION */
+.why-choose-us {
+  padding: 50px 6%;
+  background: #050505;
+}
+
+.why-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.why-label {
+  color: #c6a66b;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+  text-align: left;
+}
+
+.why-title {
+  font-size: 64px;
+  color: #c6a66b;
+  margin-top: 12px;
+  font-family:
+    "Cormorant Garamond",
+    serif;
+  font-weight: 500;
+  text-align: left;
+}
+
+.features {
+  display: grid;
+  grid-template-columns:
+    repeat(3, 1fr);
+  gap: 40px;
+}
+
+.feature-card {
+  padding: 50px 40px;
+  border-top: 1px solid
+    rgba(198, 166, 107, 0.2);
+  transition: 0.4s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+}
+
+.feature-number {
+  display: block;
+  color: rgba(198, 166, 107, 0.4);
+  font-size: 90px;
+  font-family:
+    "Cormorant Garamond",
+    serif;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  color: #c6a66b;
+  font-size: 28px;
+  margin-bottom: 16px;
+  font-family:
+    "Cormorant Garamond",
+    serif;
+}
+
+.feature-card p {
+  color: rgba(255,255,255,0.7);
+  line-height: 1.8;
+}
+
+/* MOBILE PHONES */
+@media (max-width: 768px) {
+  .why-choose-us {
+    padding: 45px 20px;
+  }
+
+  .why-header {
+    margin-bottom: 35px;
+  }
+
+  .why-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  .why-title {
+    font-size: clamp(36px, 8vw, 48px);
+    line-height: 1.1;
+    margin-top: 10px;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .feature-card {
+    padding: 28px 10px;
+  }
+
+  .feature-number {
+    font-size: 64px;
+    margin-bottom: 12px;
+  }
+
+  .feature-card h3 {
+    font-size: 25px;
+    margin-bottom: 12px;
+  }
+
+  .feature-card p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+}
+
+/* SMALL MOBILE PHONES */
+@media (max-width: 480px) {
+  .why-choose-us {
+    padding: 35px 16px;
+  }
+
+  .why-header {
+    margin-bottom: 25px;
+  }
+
+  .why-label {
+    font-size: 9px;
+    letter-spacing: 1.8px;
+  }
+
+  .why-title {
+    font-size: 34px;
+    line-height: 1.15;
+  }
+
+  .features {
+    gap: 12px;
+  }
+
+  .feature-card {
+    padding: 24px 6px;
+  }
+
+  .feature-number {
+    font-size: 54px;
+    margin-bottom: 10px;
+  }
+
+  .feature-card h3 {
+    font-size: 23px;
+  }
+
+  .feature-card p {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+}

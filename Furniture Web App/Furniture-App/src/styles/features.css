@@ -1,0 +1,734 @@
+
+/* FEATURED COLLECTIONS SECTION */
+.featured-collections {
+  padding: 140px 6%;
+  background: #060606;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.section-label {
+  color: #c6a66b;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.section-title {
+  color: #c6a66b;
+  font-size: 64px;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+.collections-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 24px;
+}
+
+.living {
+  grid-column: span 2;
+  height: 450px;
+}
+
+.dining,
+.bedroom {
+  height: 450px;
+}
+
+.collection-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+.collection-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.8s ease;
+}
+
+.collection-card:hover img {
+  transform: scale(1.08);
+}
+
+
+
+/* THE LUXURY OVERLAY & REVEAL */
+.collection-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  padding: 50px;
+  background: linear-gradient(
+  to top,
+  rgba(0, 0, 0, 0.65) 0%,
+  rgba(0, 0, 0, 0.45) 30%,
+  rgba(0, 0, 0, 0.25) 60%,
+  rgba(0, 0, 0, 0.08) 85%,
+  transparent 100%
+);
+  
+}
+
+.overlay-content {
+  transform: translateY(30px);
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.collection-card:hover .overlay-content {
+  transform: translateY(0);
+}
+
+.collection-overlay h3 {
+  color: #c6a66b;
+  font-size: 40px;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.collection-overlay p {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+  max-width: 340px;
+  margin-bottom: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease 0.1s, margin-bottom 0.6s ease 0.1s;
+}
+
+.collection-card:hover .collection-overlay p {
+  opacity: 1;
+  margin-bottom: 30px; 
+}
+
+.luxury-btn {
+  width: fit-content;
+  padding: 0 0 6px 0;
+  border: none;
+  border-bottom: 1px solid rgba(198, 166, 107, 0.3); 
+  background: transparent;
+  color: #c6a66b;
+  font-family: inherit;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.6s ease 0.2s, border-bottom 0.4s ease, color 0.4s ease;
+}
+
+.collection-card:hover .luxury-btn {
+  opacity: 1;
+}
+
+.luxury-btn:hover {
+  border-bottom: 1px solid rgba(198, 166, 107, 1); 
+  color: #b6862c;
+}
+
+/* RESPONSIVE OPTIMIZATION */
+@media (max-width: 992px) {
+  .dining, .bedroom {
+    grid-column: span 12; 
+    height: 500px;
+  }
+  
+  .featured-collections {
+    padding: 100px 5%;
+  }
+  
+  .overlay-content {
+    transform: translateY(0);
+  }
+  
+  .collection-overlay p, .luxury-btn {
+    opacity: 1;
+    margin-bottom: 20px;
+  }
+}
+
+
+
+
+/* =========================================
+   RESPONSIVE FEATURED COLLECTIONS
+========================================= */
+
+/* LARGE DESKTOPS */
+@media (min-width: 1440px) {
+  .featured-collections {
+    padding: 150px 7%;
+  }
+
+  .section-header {
+    margin-bottom: 80px;
+  }
+
+  .section-title {
+    font-size: clamp(64px, 4.5vw, 76px);
+  }
+
+  .collections-grid {
+    gap: 28px;
+  }
+
+  .living {
+    height: 520px;
+  }
+
+  .dining,
+  .bedroom {
+    height: 440px;
+  }
+
+  .collection-overlay {
+    padding: 55px;
+  }
+
+  .collection-overlay h3 {
+    font-size: 44px;
+  }
+}
+
+/* LAPTOPS & SMALL DESKTOPS */
+@media (min-width: 993px) and (max-width: 1199px) {
+  .featured-collections {
+    padding: 110px 5%;
+  }
+
+  .section-header {
+    margin-bottom: 55px;
+  }
+
+  .section-title {
+    font-size: 54px;
+  }
+
+  .collections-grid {
+    gap: 20px;
+  }
+
+  .living {
+    height: 400px;
+  }
+
+  .dining,
+  .bedroom {
+    height: 360px;
+  }
+
+  .collection-overlay {
+    padding: 32px;
+  }
+
+  .collection-overlay h3 {
+    font-size: 34px;
+  }
+
+  .collection-overlay p {
+    font-size: 14px;
+  }
+}
+
+/* TABLETS & LANDSCAPE IPADS */
+@media (min-width: 769px) and (max-width: 992px) {
+  .featured-collections {
+    padding: 90px 5%;
+  }
+
+  .section-header {
+    margin-bottom: 45px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+  }
+
+  .section-title {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+
+  .collections-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .living {
+    grid-column: 1 / -1;
+    height: 360px;
+  }
+
+  .dining,
+  .bedroom {
+    grid-column: auto;
+    height: 320px;
+  }
+
+  .collection-card {
+    border-radius: 18px;
+  }
+
+  .collection-overlay {
+    padding: 28px;
+  }
+
+  .overlay-content {
+    transform: translateY(0);
+  }
+
+  .collection-overlay h3 {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
+  .collection-overlay p {
+    max-width: 100%;
+    font-size: 13px;
+    line-height: 1.6;
+    opacity: 1;
+    margin-bottom: 18px;
+  }
+
+  .luxury-btn {
+    font-size: 11px;
+    opacity: 1;
+  }
+
+  .collection-card:hover img {
+    transform: scale(1.04);
+  }
+}
+
+/* MOBILE PHONES & PORTRAIT IPADS */
+@media (max-width: 768px) {
+  .featured-collections {
+    padding: 75px 5%;
+  }
+
+  .section-header {
+    margin-bottom: 38px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    line-height: 1.7;
+  }
+
+  .section-title {
+    margin-top: 10px;
+    font-size: clamp(36px, 7vw, 46px);
+    line-height: 1.08;
+    letter-spacing: -0.5px;
+  }
+
+  .collections-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .living,
+  .dining,
+  .bedroom {
+    grid-column: auto;
+    height: clamp(280px, 65vw, 380px);
+    min-height: 280px;
+  }
+
+  .living{
+    width: 100%
+  }
+
+  .collection-card {
+    border-radius: 16px;
+  }
+
+  .collection-card img {
+    object-position: center;
+  }
+
+  .collection-overlay {
+    padding: clamp(20px, 5vw, 30px);
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.56) 38%,
+      rgba(0, 0, 0, 0.12) 75%,
+      transparent 100%
+    );
+  }
+
+  .overlay-content {
+    transform: translateY(0);
+  }
+
+  .collection-overlay h3 {
+    font-size: clamp(28px, 5.5vw, 36px);
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+
+  .collection-overlay p {
+    max-width: 100%;
+    font-size: 13px;
+    line-height: 1.65;
+    opacity: 1;
+    margin-bottom: 18px;
+  }
+
+  .luxury-btn {
+    font-size: 10px;
+    letter-spacing: 1.6px;
+    opacity: 1;
+  }
+
+  .collection-card:hover img {
+    transform: scale(1.03);
+  }
+}
+
+/* SMALL MOBILE PHONES */
+@media (max-width: 480px) {
+  .featured-collections {
+    padding: 60px 20px;
+  }
+
+  .section-header {
+    margin-bottom: 30px;
+  }
+
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 1.8px;
+  }
+
+  .section-title {
+    font-size: clamp(32px, 9vw, 40px);
+    line-height: 1.1;
+    margin-bottom: -40px;
+  }
+
+  .collections-grid {
+    gap: 14px;
+  }
+
+  .living,
+  .dining,
+  .bedroom {
+    height: 300px;
+    min-height: 260px;
+  }
+
+  .collection-card {
+    border-radius: 13px;
+  }
+
+  .collection-overlay {
+    padding: 20px;
+  }
+
+  .collection-overlay h3 {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .collection-overlay p {
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .luxury-btn {
+    font-size: 10px;
+    letter-spacing: 1.3px;
+  }
+}
+
+/* EXTRA-SMALL PHONES */
+@media (max-width: 360px) {
+  .featured-collections {
+    padding: 48px 16px;
+  }
+
+  .section-header {
+    margin-bottom: 25px;
+  }
+
+  .section-title {
+    font-size: 30px;
+  }
+
+  .collections-grid {
+    gap: 12px;
+  }
+
+  .living,
+  .dining,
+  .bedroom {
+    height: 270px;
+    min-height: 250px;
+  }
+
+  .collection-overlay {
+    padding: 16px;
+  }
+
+  .collection-overlay h3 {
+    font-size: 25px;
+  }
+
+  .collection-overlay p {
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+
+  .luxury-btn {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+}
+
+/* TOUCH DEVICES
+   Keep descriptions and links visible without hover. */
+@media (hover: none) {
+  .overlay-content {
+    transform: translateY(0);
+  }
+
+  .collection-overlay p {
+    opacity: 1;
+  }
+
+  .luxury-btn {
+    opacity: 1;
+  }
+}
+
+/* ACCESSIBILITY: REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  .collection-card img,
+  .overlay-content,
+  .collection-overlay p,
+  .luxury-btn {
+    transition: none;
+  }
+
+  .collection-card:hover img {
+    transform: none;
+  }
+}
+
+
+/* MOBILE: FEATURED COLLECTIONS */
+@media (max-width: 768px) {
+  .featured-collections {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 55px 16px;
+    box-sizing: border-box;
+  }
+
+  .section-header {
+    padding: 0 4px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    line-height: 1.4;
+  }
+
+  .section-title {
+    margin-top: 6px;
+    margin-bottom: 0;
+    font-size: clamp(34px, 7vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -0.4px;
+  }
+
+  .collections-grid {
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .living,
+  .dining,
+  .bedroom {
+    width: 100%;
+    min-width: 0;
+    grid-column: 1 / -1;
+    height: clamp(280px, 70vw, 360px);
+    min-height: 260px;
+    border-radius: 12px;
+  }
+
+  .collection-card {
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .collection-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .collection-overlay {
+    padding: 22px;
+  }
+
+  .overlay-content {
+    transform: translateY(0);
+  }
+
+  .collection-overlay h3 {
+    font-size: clamp(27px, 5.5vw, 34px);
+    margin-bottom: 8px;
+  }
+
+  .collection-overlay p {
+    font-size: 13px;
+    line-height: 1.55;
+    opacity: 1;
+    margin-bottom: 14px;
+  }
+
+  .luxury-btn {
+    font-size: 10px;
+    opacity: 1;
+  }
+}
+
+/* SMALL PHONES */
+@media (max-width: 480px) {
+  .featured-collections {
+    padding: 45px 12px;
+  }
+
+  .section-header {
+    margin-bottom: 20px;
+  }
+
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 1.8px;
+  }
+
+  .section-title {
+    margin-top: 5px;
+    font-size: clamp(32px, 8.5vw, 38px);
+    line-height: 1.05;
+  }
+
+  .collections-grid {
+    gap: 12px;
+  }
+
+  .living,
+  .dining,
+  .bedroom {
+    height: 285px;
+    min-height: 250px;
+  }
+
+  .collection-card {
+    border-radius: 10px;
+  }
+
+  .collection-overlay {
+    padding: 18px;
+  }
+}
+
+/* EXTRA-SMALL PHONES */
+@media (max-width: 360px) {
+  .featured-collections {
+    padding: 38px 10px;
+  }
+
+  .section-header {
+    margin-bottom: 18px;
+  }
+
+  .section-title {
+    font-size: 30px;
+  }
+
+  .living,
+  .dining,
+  .bedroom {
+    height: 260px;
+    min-height: 240px;
+  }
+
+  .collection-overlay {
+    padding: 16px;
+  }
+}
+
+
+/* TABLETS AND MOBILE: MAKE ALL COLLECTION CARDS FULL WIDTH */
+@media (max-width: 768px) {
+  .featured-collections {
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .collections-grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .collections-grid .living,
+  .collections-grid .dining,
+  .collections-grid .bedroom {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    height: clamp(280px, 55vw, 360px);
+    margin: 0;
+  }
+
+  .collections-grid .collection-card {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .collections-grid .collection-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
