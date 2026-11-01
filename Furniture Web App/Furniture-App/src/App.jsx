@@ -15,8 +15,8 @@ import Footer from "./Components/Footer";
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
 
-import ProtectedRoute from "./components/admin/ProtectedRoute";
-import AdminLayout from "./components/admin/AdminLayout";
+import ProtectedRoute from "./Components/admin/ProtectedRoute";
+import AdminLayout from "./Components/admin/AdminLayout";
 
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminSetup from "./pages/admin/AdminSetup";
