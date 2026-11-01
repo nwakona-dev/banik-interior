@@ -1,4 +1,3 @@
-
 server:
   port: ${PORT:8080}
   forward-headers-strategy: framework
@@ -7,6 +6,7 @@ server:
       cookie:
         same-site: none
         secure: true
+        http-only: true
 
 spring:
   application:

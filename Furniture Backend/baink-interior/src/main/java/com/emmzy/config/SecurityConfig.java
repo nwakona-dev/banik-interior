@@ -24,24 +24,34 @@ public class SecurityConfig {
 
     @Bean
     public CookieCsrfTokenRepository csrfTokenRepository() {
+
         CookieCsrfTokenRepository repository =
                 CookieCsrfTokenRepository.withHttpOnlyFalse();
 
         repository.setCookieCustomizer(cookie -> cookie
                 .sameSite("None")
                 .secure(true)
-                .path("/"));
+                .path("/")
+        );
 
         return repository;
     }
 
     @Bean
+    public SecurityContextRepository securityContextRepository() {
+        return new HttpSessionSecurityContextRepository();
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http,
-            CookieCsrfTokenRepository csrfTokenRepository
+            CookieCsrfTokenRepository csrfTokenRepository,
+            SecurityContextRepository securityContextRepository
     ) throws Exception {
 
         http
+
+                // Enable CORS.
                 .cors(cors -> {})
 
                 // Keep CSRF protection enabled.
@@ -52,16 +62,22 @@ public class SecurityConfig {
                         )
                 )
 
-                // Keep session-based authentication.
+                // Configure session-based authentication.
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(
                                 SessionCreationPolicy.IF_REQUIRED
                         )
                 )
 
+                // Explicitly save and load authentication from the session.
+                .securityContext(context -> context
+                        .securityContextRepository(securityContextRepository)
+                )
+
+                // Configure endpoint permissions.
                 .authorizeHttpRequests(auth -> auth
 
-                        // Allow Spring to handle error dispatches.
+                        // Allow error dispatches.
                         .dispatcherTypeMatchers(
                                 DispatcherType.ERROR
                         ).permitAll()
@@ -71,14 +87,14 @@ public class SecurityConfig {
                                 HttpMethod.OPTIONS, "/**"
                         ).permitAll()
 
-                        // PUBLIC: Customers can browse published products.
+                        // PUBLIC: Customers can browse products.
                         .requestMatchers(
                                 HttpMethod.GET,
                                 "/api/products",
                                 "/api/products/**"
                         ).permitAll()
 
-                        // PUBLIC: Serve locally stored product images.
+                        // PUBLIC: Product images.
                         .requestMatchers(
                                 HttpMethod.GET,
                                 "/uploads/products/**"
@@ -98,8 +114,7 @@ public class SecurityConfig {
                                 "/api/auth/login"
                         ).permitAll()
 
-                        // ADMIN ONLY: Product creation and management.
-                        // These rules come after the public GET rules.
+                        // ADMIN ONLY: Product management.
                         .requestMatchers(
                                 "/api/products",
                                 "/api/products/**",
@@ -110,15 +125,11 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
 
+                // Disable default authentication mechanisms.
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable);
 
         return http.build();
-    }
-
-    @Bean
-    public SecurityContextRepository securityContextRepository() {
-        return new HttpSessionSecurityContextRepository();
     }
 
     @Bean
