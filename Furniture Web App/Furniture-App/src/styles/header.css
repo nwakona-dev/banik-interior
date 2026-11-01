@@ -1296,3 +1296,60 @@
     height: 35px;
   }
 }
+
+
+/* ========================================
+   MOBILE NAVIGATION FOOTER
+======================================== */
+
+.mobile-nav-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  margin-top: auto;
+  padding: 30px 0 10px;
+
+  text-align: center;
+  border-top: 1px solid rgba(198, 166, 107, 0.18);
+}
+
+.mobile-nav-footer span {
+  color: var(--gold);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  line-height: 1.4;
+}
+
+.mobile-nav-footer p {
+  margin: 7px 0 0;
+
+  color: rgba(255, 255, 255, 0.45);
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  line-height: 1.6;
+}
+
+/* Small phone adjustment */
+
+@media (max-width: 480px) {
+  .mobile-nav-footer {
+    padding: 24px 0 8px;
+  }
+
+  .mobile-nav-footer span {
+    font-size: 15px;
+    letter-spacing: 3px;
+  }
+
+  .mobile-nav-footer p {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+}
