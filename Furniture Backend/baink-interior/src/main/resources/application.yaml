@@ -1,24 +1,31 @@
+
 server:
-  port: 8080
+  port: ${PORT:8080}
   forward-headers-strategy: framework
+  servlet:
+    session:
+      cookie:
+        same-site: none
+        secure: true
 
 spring:
   application:
     name: banik-interior
 
   datasource:
-    url: jdbc:mysql://localhost:3306/baink_interior_db
-    username: root
-    password: starboy1
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
+    open-in-view: false
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
 
   servlet:
     multipart:
