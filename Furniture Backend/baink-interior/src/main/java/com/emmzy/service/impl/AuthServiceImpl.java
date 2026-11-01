@@ -86,6 +86,7 @@ public class AuthServiceImpl implements AuthService {
         adminRepository.save(admin);
     }
 
+
     @Override
     public void login(
             String username,
@@ -93,8 +94,8 @@ public class AuthServiceImpl implements AuthService {
             HttpServletRequest request,
             HttpServletResponse response
     ) {
-        // Make username login case-insensitive.
-        String normalizedUsername = username.trim().toLowerCase(Locale.ROOT);
+        String normalizedUsername =
+                username.trim().toLowerCase(Locale.ROOT);
 
         Authentication authentication =
                 authenticationManager.authenticate(
@@ -104,8 +105,8 @@ public class AuthServiceImpl implements AuthService {
                         )
                 );
 
-        // Prevent session fixation by rotating the session ID.
-        HttpSession session = request.getSession(true);
+        // Protect against session fixation.
+        request.getSession(true);
         request.changeSessionId();
 
         SecurityContext context =
@@ -120,6 +121,7 @@ public class AuthServiceImpl implements AuthService {
                 response
         );
     }
+
 
     @Override
     public void logout(HttpServletRequest request) {

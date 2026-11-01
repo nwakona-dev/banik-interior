@@ -18,13 +18,15 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
+import org.springframework.security.web.csrf.CsrfTokenRequestHandler;
+
+import java.util.function.Supplier;
 
 @Configuration
 public class SecurityConfig {
 
     @Bean
     public CookieCsrfTokenRepository csrfTokenRepository() {
-
         CookieCsrfTokenRepository repository =
                 CookieCsrfTokenRepository.withHttpOnlyFalse();
 
@@ -42,6 +44,38 @@ public class SecurityConfig {
         return new HttpSessionSecurityContextRepository();
     }
 
+    // SPA-compatible CSRF handler.
+    static final class SpaCsrfTokenRequestHandler
+            implements CsrfTokenRequestHandler {
+
+        private final CsrfTokenRequestAttributeHandler delegate =
+                new CsrfTokenRequestAttributeHandler();
+
+        @Override
+        public void handle(
+                jakarta.servlet.http.HttpServletRequest request,
+                jakarta.servlet.http.HttpServletResponse response,
+                Supplier<org.springframework.security.web.csrf.CsrfToken> csrfToken
+        ) {
+            delegate.handle(request, response, csrfToken);
+            csrfToken.get();
+        }
+
+        @Override
+        public String resolveCsrfTokenValue(
+                jakarta.servlet.http.HttpServletRequest request,
+                org.springframework.security.web.csrf.CsrfToken csrfToken
+        ) {
+            String headerValue = request.getHeader(csrfToken.getHeaderName());
+
+            if (headerValue != null && !headerValue.isBlank()) {
+                return headerValue;
+            }
+
+            return delegate.resolveCsrfTokenValue(request, csrfToken);
+        }
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http,
@@ -50,82 +84,55 @@ public class SecurityConfig {
     ) throws Exception {
 
         http
-
-                // Enable CORS.
                 .cors(cors -> {})
 
-                // Keep CSRF protection enabled.
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(csrfTokenRepository)
                         .csrfTokenRequestHandler(
-                                new CsrfTokenRequestAttributeHandler()
+                                new SpaCsrfTokenRequestHandler()
                         )
                 )
 
-                // Configure session-based authentication.
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(
-                                SessionCreationPolicy.IF_REQUIRED
-                        )
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 )
 
-                // Explicitly save and load authentication from the session.
                 .securityContext(context -> context
                         .securityContextRepository(securityContextRepository)
                 )
 
-                // Configure endpoint permissions.
                 .authorizeHttpRequests(auth -> auth
 
-                        // Allow error dispatches.
-                        .dispatcherTypeMatchers(
-                                DispatcherType.ERROR
-                        ).permitAll()
+                        .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
 
-                        // Allow CORS preflight requests.
                         .requestMatchers(
                                 HttpMethod.OPTIONS, "/**"
                         ).permitAll()
 
-                        // PUBLIC: Customers can browse products.
                         .requestMatchers(
                                 HttpMethod.GET,
                                 "/api/products",
-                                "/api/products/**"
-                        ).permitAll()
-
-                        // PUBLIC: Product images.
-                        .requestMatchers(
-                                HttpMethod.GET,
-                                "/uploads/products/**"
-                        ).permitAll()
-
-                        // PUBLIC: Authentication and CSRF endpoints.
-                        .requestMatchers(
-                                HttpMethod.GET,
+                                "/api/products/**",
+                                "/uploads/products/**",
                                 "/api/auth/csrf",
                                 "/api/auth/me"
                         ).permitAll()
 
-                        // PUBLIC: Login and initial admin setup.
                         .requestMatchers(
                                 HttpMethod.POST,
                                 "/api/auth/setup",
                                 "/api/auth/login"
                         ).permitAll()
 
-                        // ADMIN ONLY: Product management.
                         .requestMatchers(
                                 "/api/products",
                                 "/api/products/**",
                                 "/api/admin/**"
                         ).hasRole("ADMIN")
 
-                        // Protect all remaining endpoints.
                         .anyRequest().authenticated()
                 )
 
-                // Disable default authentication mechanisms.
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable);
 
