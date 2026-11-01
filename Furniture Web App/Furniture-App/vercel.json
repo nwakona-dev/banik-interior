@@ -1,6 +1,15 @@
+
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://banik-interior.onrender.com/api/$1"
+    },
+    {
+      "source": "/uploads/(.*)",
+      "destination": "https://banik-interior.onrender.com/uploads/$1"
+    },
     {
       "source": "/(.*)",
       "destination": "/index.html"

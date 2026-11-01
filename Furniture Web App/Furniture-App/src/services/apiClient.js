@@ -1,5 +1,6 @@
+
 const API_BASE_URL = (
-  import.meta.env.VITE_API_BASE_URL || "http://localhost:8080"
+  import.meta.env.VITE_API_BASE_URL || ""
 ).replace(/\/+$/, "");
 
 let csrfToken = null;
@@ -54,6 +55,9 @@ async function fetchCsrfToken(forceRefresh = false) {
   }
 }
 
+/**
+ * Ensure that a CSRF token is available.
+ */
 async function ensureCsrfToken() {
   if (!csrfToken) {
     await fetchCsrfToken();
@@ -65,8 +69,10 @@ async function ensureCsrfToken() {
 /**
  * Send a request to the Banik Interior Spring Boot API.
  *
- * Includes session cookies and CSRF protection for state-changing
- * requests. Supports JSON and FormData request bodies.
+ * Production requests use the Vercel same-origin API proxy.
+ * Session cookies and CSRF protection are included.
+ *
+ * Supports JSON and FormData request bodies.
  */
 export async function apiRequest(
   endpoint,
@@ -78,6 +84,11 @@ export async function apiRequest(
   } = {}
 ) {
   const upperMethod = method.toUpperCase();
+
+  // Ensure the endpoint begins with a slash.
+  const normalizedEndpoint = endpoint.startsWith("/")
+    ? endpoint
+    : `/${endpoint}`;
 
   const requestHeaders = {
     Accept: "application/json",
@@ -91,9 +102,9 @@ export async function apiRequest(
     headers: requestHeaders,
   };
 
+  // Handle JSON and FormData bodies.
   if (body !== undefined) {
     if (body instanceof FormData) {
-      // Let the browser set the multipart Content-Type boundary.
       requestOptions.body = body;
     } else {
       requestHeaders["Content-Type"] = "application/json";
@@ -103,24 +114,27 @@ export async function apiRequest(
 
   const requiresCsrf = !["GET", "HEAD", "OPTIONS"].includes(upperMethod);
 
+  // Attach CSRF token to state-changing requests.
   if (requiresCsrf) {
     const token = await ensureCsrfToken();
     requestHeaders[csrfHeaderName] = token;
   }
 
   const sendRequest = () =>
-    fetch(`${API_BASE_URL}${endpoint}`, requestOptions);
+    fetch(`${API_BASE_URL}${normalizedEndpoint}`, requestOptions);
 
   let response = await sendRequest();
 
-  // Retry once with a freshly fetched CSRF token.
+  // Retry once with a freshly retrieved CSRF token.
   if (response.status === 403 && requiresCsrf) {
     const refreshedToken = await fetchCsrfToken(true);
+
     requestHeaders[csrfHeaderName] = refreshedToken;
 
     response = await sendRequest();
   }
 
+  // Read the response.
   const contentType = response.headers.get("content-type");
   const isJson = contentType?.includes("application/json");
 
@@ -131,6 +145,7 @@ export async function apiRequest(
         ? await response.json()
         : await response.text();
 
+  // Handle unsuccessful responses.
   if (!response.ok) {
     const message =
       data && typeof data === "object" && data.message
