@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import "../App.css";
 
 // Replace with your agent's WhatsApp number.
-const AGENT_WHATSAPP_NUMBER = "2348026835314";
+const AGENT_WHATSAPP_NUMBER = "2349133488474";
 
 const OurSpaces = () => {
   // WhatsApp contact handler

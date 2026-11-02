@@ -31,13 +31,11 @@
                 
                 <label className="newsletter-label">Social Media Handles</label>
                 <div className="footer-social-row">
-                <a href="#instagram" className="footer-social-link" aria-label="Instagram">
+                <a href="https://www.instagram.com/bainkinterior/" className="footer-social-link" aria-label="Instagram">
                     <FaInstagram size={28} color="#C6A66B" />
                 </a>
-                <a href="#linkedin" className="footer-social-link" aria-label="LinkedIn">
-                    {/* <Linkedin size={18} strokeWidth={1.2} /> */}
-                </a>
-                <a href="#whatsapp" className="footer-social-link" aria-label="WhatsApp">
+                
+                <a href="https://wa.me/2349133488474" className="footer-social-link" aria-label="WhatsApp">
                     <FaWhatsapp size={28} color="#C6A66B" />
                 </a>
                 </div>

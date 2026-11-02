@@ -13,7 +13,7 @@ import "../styles/cart-modal.css";
 
 // Replace this with your agent's WhatsApp number.
 // Use international format without +, spaces, or dashes.
-const AGENT_WHATSAPP_NUMBER = "2348026835314";
+const AGENT_WHATSAPP_NUMBER = "+2349133488474";
 
 const CartModal = ({ isOpen, onClose }) => {
   const {

@@ -14,7 +14,7 @@ import "../App.css";
 
 // Replace with your agent's actual WhatsApp number.
 // Use 234 followed by the number, without +, spaces or dashes.
-const AGENT_WHATSAPP_NUMBER = "2348026835314";
+const AGENT_WHATSAPP_NUMBER = "+2349133488474";
 
 export default function ConsultationCTA() {
   const stats = [
